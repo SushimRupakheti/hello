@@ -35,8 +35,8 @@ required String userId,
 required String email,
 required String username,
 required String fullName,
-required String? phoneNumber,
-required String? batchId,
+String? phoneNumber,
+String? batchId,
 String? profilePicture,
 }) async {
 await _prefs.setBool(_keysIsLoggedIn, true);
