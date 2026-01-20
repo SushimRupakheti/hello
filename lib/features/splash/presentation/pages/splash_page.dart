@@ -86,7 +86,8 @@ class _SplashPageState extends ConsumerState<SplashPage>
   Future<void> _navigateToNext() async {
     await Future.delayed(const Duration(seconds: 3));
     if (!mounted) return;
-        final userSessionServices = ref. read(userSessionServiceProvider);
+    
+    final userSessionServices = ref. read(userSessionServiceProvider);
     final isLoggedIn = userSessionServices.isLoggedIn();
 
     if(isLoggedIn){
