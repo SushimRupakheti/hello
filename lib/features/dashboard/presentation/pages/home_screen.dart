@@ -450,7 +450,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ItemDetailPage(
                                   title: item['title'],
                                   location: item['location'],
-                                  time: item['time'],
+                                  // time: item['time'],
                                   category: item['category'],
                                   isLost: item['isLost'],
                                   description:

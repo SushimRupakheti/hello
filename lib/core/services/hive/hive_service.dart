@@ -4,6 +4,7 @@ import 'package:lost_n_found/core/constants/hive_table_constant.dart';
 import 'package:lost_n_found/features/auth/data/models/auth_hive_model.dart';
 import 'package:lost_n_found/features/batch/data/models/batch_hive_model.dart';
 import 'package:lost_n_found/features/category/data/models/category_hive_model.dart';
+import 'package:lost_n_found/features/item/data/models/item_hive_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 final hiveServiceProvider = Provider<HiveService>((ref) {
@@ -236,4 +237,50 @@ class HiveService {
     final users = _authBox.values.where((user) => user.email == email);
     return users.isNotEmpty;
   }
-}
+
+
+  Box<ItemHiveModel> get _itemBox =>
+      Hive.box<ItemHiveModel>(HiveTableConstant.itemTable);
+
+  Future<ItemHiveModel> createItem(ItemHiveModel item) async {
+    await _itemBox.put(item.itemId, item);
+    return item;
+  }
+
+  List<ItemHiveModel> getAllItems() {
+    return _itemBox.values.toList();
+  }
+
+  ItemHiveModel? getItemById(String itemId) {
+    return _itemBox.get(itemId);
+  }
+
+  List<ItemHiveModel> getItemsByUser(String userId) {
+    return _itemBox.values.where((item) => item.reportedBy == userId).toList();
+  }
+
+  List<ItemHiveModel> getLostItems() {
+    return _itemBox.values.where((item) => item.type == 'lost').toList();
+  }
+
+  List<ItemHiveModel> getFoundItems() {
+    return _itemBox.values.where((item) => item.type == 'found').toList();
+  }
+
+  List<ItemHiveModel> getItemsByCategory(String categoryId) {
+    return _itemBox.values
+        .where((item) => item.category == categoryId)
+        .toList();
+  }
+
+  Future<bool> updateItem(ItemHiveModel item) async {
+    if (_itemBox.containsKey(item.itemId)) {
+      await _itemBox.put(item.itemId, item);
+      return true;
+    }
+    return false;
+  }
+
+  Future<void> deleteItem(String itemId) async {
+    await _itemBox.delete(itemId);
+  }}

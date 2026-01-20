@@ -23,7 +23,7 @@ class UserSessionServices{
   static const String _keysIsLoggedIn='is_logged_in';
   static const String _keyUserId='user_id';
   static const String _keyUserEmail='user_email';
-  static const String _keyUsername='username';
+  static const String _keyUserUsername='user_username';
   static const String _keyUserFullName='user_full_name';
   static const String _keyUserPhoneNumber='user_phone_number';
   static const String _keyUserBatchId='user_batch_id';
@@ -42,8 +42,9 @@ String? profilePicture,
 await _prefs.setBool(_keysIsLoggedIn, true);
 await _prefs.setString(_keyUserId, userId);
 await _prefs.setString(_keyUserEmail, email);
-await _prefs.setString(_keyUsername, username);
+await _prefs.setString(_keyUserUsername, username);
 await _prefs.setString(_keyUserFullName, fullName);
+
 
 
 if(phoneNumber!= null){
@@ -61,42 +62,52 @@ if(profilePicture!=null){
     await _prefs.remove(_keysIsLoggedIn);
     await _prefs.remove(_keyUserId);
     await _prefs.remove(_keyUserEmail);
-    await _prefs.remove(_keyUsername);
+    await _prefs.remove(_keyUserUsername);
     await _prefs.remove(_keyUserBatchId);
     await _prefs.remove(_keyUserPhoneNumber);
     await _prefs.remove(_keyUserProfileImage);
     await _prefs.remove(_keyUserFullName);
+
+
   }
 
-  bool isLoggedIn(){
+ bool isLoggedIn() {
     return _prefs.getBool(_keysIsLoggedIn) ?? false;
   }
-  String? getUserId(){
+
+  // Get current user ID
+  String? getCurrentUserId() {
     return _prefs.getString(_keyUserId);
   }
 
-  String? getUserEmail() {
-  return _prefs.getString(_keyUserEmail);
+  // Get current user email
+  String? getCurrentUserEmail() {
+    return _prefs.getString(_keyUserEmail);
   }
 
-  String? getUsername() {
-  return _prefs.getString(_keyUsername);
+  // Get current user full name
+  String? getCurrentUserFullName() {
+    return _prefs.getString(_keyUserFullName);
   }
 
-  String? getUserFullName() {
-  return _prefs.getString(_keyUserFullName);
+  // Get current user username
+  String? getCurrentUserUsername() {
+    return _prefs.getString(_keyUserUsername);
   }
 
-  String? getUserPhoneNumber() {
-  return _prefs.getString(_keyUserPhoneNumber);
+  // Get current user phone number
+  String? getCurrentUserPhoneNumber() {
+    return _prefs.getString(_keyUserPhoneNumber);
   }
 
-  String? getUserBatchId() {
-  return _prefs.getString(_keyUserBatchId);
+  // Get current user batch ID
+  String? getCurrentUserBatchId() {
+    return _prefs.getString(_keyUserBatchId);
   }
 
-  String? getUserProfileImage() {
-  return _prefs.getString(_keyUserProfileImage);
+  // Get current user profile picture
+  String? getCurrentUserProfilePicture() {
+    return _prefs.getString(_keyUserProfileImage);
   }
 
 
